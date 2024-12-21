@@ -18,11 +18,11 @@ clock = pg.time.Clock()
 
 ## Start of reading game file
 def read_core(path):
-    path += "/core.txt" # makes sure we're reading core
+    path += "/core.json" # sets path of core
     f = open(path, "r")
-    title = f.readline()
-    pg.display.set_caption(title) # sets title of page to game title.
-    return f.readline()
+    core = json.loads(f.read())
+    pg.display.set_caption(core.get("title")) # sets title of page to game title.
+    return core.get("first_world")
 world = read_core(game)
 
 
