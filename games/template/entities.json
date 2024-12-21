@@ -1,0 +1,4 @@
+{
+    "space":[true, true, 1, [0, 0, 0]],
+    "wall":[false, true, 0.4, [0, 0, 0]]
+}
