@@ -11,6 +11,7 @@ def initializePygame():
     clock = pg.time.Clock()
 initializePygame()
 
+
 def main():
     while running:
         for event in pg.event.get():
