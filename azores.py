@@ -33,6 +33,7 @@ def read_entities(path):
     return json.loads(f.read()) # Loads dictionary from entities so we can see details about tiles
 entities = read_entities(game)
 
+
 def read_world(path):
     path += "/worlds/" + world + ".json"
     f = open(path, "r")
