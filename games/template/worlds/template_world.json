@@ -1,0 +1,4 @@
+{
+    "environment":[0, 255, 0],
+    "world":[["wall", "wall", "wall"], ["wall", "space", "wall"], ["wall", "wall", "wall"]]
+}
