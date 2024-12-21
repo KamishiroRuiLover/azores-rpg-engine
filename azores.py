@@ -30,28 +30,29 @@ entities = {}
 def read_entities(path):
     path += "/entities.json"
     f = open(path, "r")
-    return json.loads(f.read())
+    return json.loads(f.read()) # Loads dictionary from entities so we can see details about tiles
 entities = read_entities(game)
+
+def read_world(path):
+    path += "/worlds/" + world + ".json"
+    f = open(path, "r")
+    return json.loads(f.read())
+world_load = read_world(game)
 ## End of reading game file
 
 
-def display_world(path):
-    path += "/worlds/" + world + ".json"
-    f = open(path, "r")
-    temp = json.loads(f.read())
-    world_load = temp.get("world")
-    for y, y_value in enumerate(world_load):
+def display_world(world):
+    for y, y_value in enumerate(world.get("world")):
         for x, x_value in enumerate(y_value):
             square = pg.Rect(x * 60, y * 60, 60, 60)
-            color = (255,0,0)
             if entities.get(x_value)[1]:
                 brightness = entities.get(x_value)[2]
-                environment = temp.get("environment")
+                environment = world.get("environment")
                 color = (int(environment[0] * brightness), int(environment[1] * brightness), int(environment[2] * brightness))
             else:
                 color = (entities.get(x_value)[3][0], entities.get(x_value)[3][1], entities.get(x_value)[3][2])
             pg.draw.rect(screen, color, square)
-display_world(game)
+display_world(world_load)
 
 
 while running:

@@ -1,2 +1,2 @@
-Template Game
+Template
 template_world
