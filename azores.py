@@ -1,12 +1,17 @@
-import pygame as pg
+import pygame as pg # type: ignore
 import sys
 import json
+import importlib
 
 
 if len(sys.argv) != 2:
-    print("USAGE: python azores.py games/FOLDER")
+    print("USAGE: python azores.py FOLDER")
     sys.exit()
-game = sys.argv[1]
+game = "games/" + sys.argv[1]
+
+
+funcs_name = "games." + sys.argv[1] + ".function.functionality_tags"
+imp_funcs = importlib.import_module(funcs_name)
 
 
 # Initializing the pygame screen
@@ -46,13 +51,9 @@ def display_world(world):
     for y, y_value in enumerate(world.get("world")):
         for x, x_value in enumerate(y_value):
             square = pg.Rect(x * 60, y * 60, 60, 60)
-            if entities.get(x_value)[1]:
-                brightness = entities.get(x_value)[2]
-                environment = world.get("environment")
-                color = (int(environment[0] * brightness), int(environment[1] * brightness), int(environment[2] * brightness))
-            else:
-                color = (entities.get(x_value)[3][0], entities.get(x_value)[3][1], entities.get(x_value)[3][2])
-            pg.draw.rect(screen, color, square)
+            display_details = imp_funcs.display_tags.get(entities.get(x_value)[4])(entities.get(x_value)[2], world.get("environment"), entities.get(x_value)[3], entities.get(x_value)[1])
+            if display_details[0] == 1:
+                pg.draw.rect(screen, display_details[1], square)
 display_world(world_load)
 
 
